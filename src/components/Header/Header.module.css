@@ -3,9 +3,12 @@
     background-color: rgb(255, 208, 0);
 }
 .navLink a{
-    margin-left : 20px;
+    margin-left : 40px;
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
 };
-.navLink {
-    font-size: 50px;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
+.navLink login{
+    text-align: center;
 }

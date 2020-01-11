@@ -6,19 +6,22 @@ import CatalogItems from './components/CatalogItems/CatalogItems';
 import AdminPanel from './components/AdminPanel/AdminPanel'
 
 
-function App() {
-  return (
-    <BrowserRouter>
-      <div className="App">
-        <Header />
-        <Route path="/"
-          render={() => <h2>Главная страница</h2>}
-          exact />
-        <Route path="/catalog" component={CatalogItems} />
-        <Route path="/admin-panel" component={AdminPanel} />
-      </div>
-    </BrowserRouter>
-  );
-}
+export default class App extends React.Component {
 
-export default App;
+  render() {
+ 
+
+    return (
+      <BrowserRouter>
+        <div className="App">
+          <Header />
+          <Route path="/"
+            render={() => <h2>Главная страница</h2>}
+            exact />
+          <Route path="/catalog" component={CatalogItems} />
+          <Route path="/admin-panel" component={AdminPanel} />
+        </div>
+      </BrowserRouter>
+    );
+  };
+};

@@ -1,15 +1,18 @@
 import React from 'react';
 // import styles from './Item.module.css'
 
-const Item = () => {
+const Item = (props) => {
+    const car = props.cars.map((car, index) =>
+        <li>
+
+            <strong>Марка:</strong> {car.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <strong> Год выпуска:</strong> {car.year}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <strong> Цена:</strong> {car.price}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </li>)
     return (
         <div>
-            <ul>
-                <li>Товар 1</li>
-                <li>Товар 2</li>
-                <li>Товар 3</li>
-                <li>Товар 4</li>
-                <li>Товар 5</li>
+            <ul key={car.index}>
+                {car}
             </ul>
         </div>
     )
