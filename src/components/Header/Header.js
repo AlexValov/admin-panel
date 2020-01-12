@@ -10,7 +10,7 @@ const Header = () => {
                 <Link to='/'>Home</Link>
                 <Link to='/catalog'>Каталог</Link>
                 <Link to='/admin-panel'>Админка</Link>
-                <a href='#'>Login</a>
+                <a href='/'>Login</a>
             </div>
         </div>
     )

@@ -1,0 +1,16 @@
+.CatalogItems {
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.CatalogItems h3 {
+    text-align: center;
+}
+
+.ItemsWrapper {
+    width: 800px;
+}
+

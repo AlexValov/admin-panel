@@ -1,0 +1,9 @@
+.addForm{
+    position: absolute;
+    right: 25px;
+}
+
+.addForm button{
+    margin: 20px;
+    background-color: burlywood;
+}
