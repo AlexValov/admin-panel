@@ -1,19 +1,23 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styles from './ItemList.module.css'
 import Item from './Item/Item'
 
-export default class ItemList extends Component {
-  
-  render() {
-    const onDeleted = this.props.onDeleted
-    const cars = this.props.cars.map((car) => {
+const ItemList =(props)=> {
+  const handleDeleteUser = (id) => {
+    props.deleteCar(id)
+  }
+
+
+    const cars = props.cars.map((car) => {
       const { id, ...itemProps } = car
       return (
         <li key={id}>
           <Item
             {...itemProps}
-            onDeleted = {()=> onDeleted(id)}
+            
           />
+       <button onClick={()=>handleDeleteUser(car.id)}>Удалить</button>
+       <button onClick={()=> {props.editRow(car)}}> Редактировать </button>
         </li>
       )
     })
@@ -24,11 +28,12 @@ export default class ItemList extends Component {
   
           <ul>
             {cars}
+
           </ul>
         </div>
       </div>
     )
 
   }
-  };
+export default ItemList;
   

@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
-import styles from './ItemAddForm.module.css'
+import React, { useState, useEffect } from 'react';
+import styles from '../AdminPanel/ItemAddForm/ItemAddForm.module.css'
 
-const ItemAddForm =(props) => {
+const EditItemForm =(props) => {
 
-    const initialFormState = {id: null, name: '', price: '', description: '' }
+    const[car, setCar] = useState(props.currentCar)
 
-    const[car, setCar] = useState(initialFormState)
+    useEffect(()=> {
+        setCar(props.currentCar)
+    },[props])
+
+
 
     const handleInputChange = (event) => {
-        const { name, value } = event.currentTarget
+        const { name, value } = event.target
         setCar({...car, [name]: value})
     }
 
@@ -17,10 +21,10 @@ const ItemAddForm =(props) => {
         event.preventDefault()
         if(!car.name || !car.price || !car.description) 
         return 
-            props.addCar(car)
-            setCar(initialFormState)
-    
+            props.updateCar(car.id, car)
+            
         }
+        
         
         
         return (
@@ -51,10 +55,13 @@ const ItemAddForm =(props) => {
                     onChange={handleInputChange}
                 />
 
-                <button>Добавить товар</button>
+                <button> Обновить товар</button>
+                <button onClick={() => props.setEditing(false)}>
+                   Отмена
+                </button>
             </form>
         )
     }
-export default ItemAddForm;
+export default EditItemForm;
 
  

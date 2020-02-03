@@ -7,11 +7,11 @@ export default class Item extends React.Component {
             <div className={styles.Items}>
                 <div className={styles.myFlexContainer}>
                     <div className={styles.myFlexBlock}>{this.props.name}</div>
-                    <div className={styles.myFlexBlock}>{this.props.year}</div>
                     <div className={styles.myFlexBlock}>{this.props.price}</div>
-                    <button>Ред.</button>
-                    <button onClick={this.props.onDeleted}>Удалить</button>
+                    <div className={styles.myFlexBlock}>{this.props.description}</div>
+
                 </div>
+               
             </div>
         )
     };

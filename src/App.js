@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react'
 import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Layout from './hoc/Layout/Layout';
@@ -6,55 +6,54 @@ import Header from './components/Header/Header';
 import ItemList from './components/ItemList/ItemList';
 import AdminPanel from './components/AdminPanel/AdminPanel';
 import ItemAddForm from './components/AdminPanel/ItemAddForm/ItemAddForm';
+import EditItemForm from './components/EditItemForm/EditItemForm'
+
+
+
+const App=() => {
+
+    const carsData = [
+      { id: 1, name: 'Ford', price: 7000, description: 'Super car' },
+      { id: 2, name: 'Audi', price: 20000, description: 'Super car' },
+      { id: 3, name: 'bmw',  price: 5000, description: 'Super car' },
+      { id: 4, name: 'Man',  price: 2000, description: 'Super car' }
+    ];
+
+  const [cars, setCars] = useState(carsData)
+
+  const [editing, setEditing] = useState(false)
+  const initialFormState = {id: null, name: '', price: '', description: '' }
+  const [currentCar, setCurrentCar] = useState(initialFormState)
+  const updateCar = (id, updatedCar) => {
+
+    setEditing(false)
+    // и обновляем пользователя, если нашли его по id
+    setCars(cars.map(car => (car.id === id ? updatedCar : car)))
+  }
+
+
+  const editRow = car => {
+    // готовы редактировать - флажок в true
+    setEditing(true)
+    // устанавливаем значения полей для формы редактирования
+    // на основании выбранного "юзера"
+    setCurrentCar({ id: car.id, name: car.name, price: car.price, description: car.description})
+  }
 
 
 
 
-export default class App extends React.Component {
+ 
+    const addCar = (car) => {
+      car.id = cars.length + 1
+      setCars([...cars, car])
+    }
 
-  maxId = 10;
-  
-  state = {
-    cars: [
-      { id: 1, name: 'Ford', year: 2018, price: 7000 },
-      { id: 2, name: 'Audi', year: 2015, price: 20000 },
-      { id: 3, name: 'bmw', year: 2013, price: 5000 },
-      { id: 4, name: 'Man', year: 1988, price: 2000 },
-      { id: 5, name: 'Ford', year: 2018, price: 7000 }
-    ]
-  };
+    const deleteCar = id => {
+      setEditing(false)
+      setCars(cars.filter(car => car.id !== id))
+    }
 
-  addItem = (text) => {
-    const newItem = {
-      id: this.maxId++,
-      name: text,
-      year: text,
-      price: text
-    };
-
-    this.setState(({ cars }) => {
-      const newArr = [...cars, newItem];
-      return {
-        cars: newArr
-      };
-  })
-}
-
-  deleteItem = (id) => {
-    this.setState(({ cars }) => {
-      const index = cars.findIndex((el) => el.id === id);
-      const before = cars.slice(0, index);
-      const after = cars.slice(index + 1);
-
-      const newArray = [...before, ...after];
-
-      return {
-        cars: newArray
-      };
-    });
-  };
-
-  render() {
     return (
       <BrowserRouter>
         <Layout>
@@ -64,12 +63,15 @@ export default class App extends React.Component {
               render={() => <h2>Главная страница</h2>}
               exact />
             <Route path="/admin-panel" component={AdminPanel} />
-            <ItemList cars={this.state.cars} onDeleted={this.deleteItem} />
-            <ItemAddForm onItemAdded={this.addItem} />
+            <EditItemForm  editing={editing} setEditing={setEditing} currentCar={currentCar} updateCar={updateCar}/>
+            <ItemList cars={cars} deleteCar={deleteCar} editRow={editRow}/>
+            <ItemAddForm  addCar={addCar} />
           </div>
         </Layout>
 
       </BrowserRouter>
     )
   };
-};
+
+
+export default App;
